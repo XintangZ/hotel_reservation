@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -19,6 +19,7 @@
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -51,6 +52,16 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-nav-link :href="route('login')" class="mr-4">
+                    {{ __('Log in') }}
+                </x-nav-link>
+                <x-nav-link :href="route('register')">
+                    {{ __('Register') }}
+                </x-nav-link>
+            </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -73,6 +84,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
@@ -96,5 +108,15 @@
                 </form>
             </div>
         </div>
+        @else
+        <div class="py-1 border-t border-gray-200">
+            <x-responsive-nav-link :href="route('login')">
+                {{ __('Log in') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')" class="mt-1">
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+        </div>
+        @endauth
     </div>
 </nav>
