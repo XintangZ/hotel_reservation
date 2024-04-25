@@ -11,45 +11,39 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('reservation.update', $reservation->id) }}" method="POST">
+            <form action="{{ route('reservation.update', $reservation->id) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PATCH')
 
-                <label for="check_in_date">Check-in Date:</label>
-                <input type="date" name="check_in_date" id="check_in_date" value="{{ $reservation->check_in_date }}">
-                <br>
-                <br>
+                <div>
+                    <x-input-label for="check_in_date" :value="__('Check-in Date')" />
+                    <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" :value="old('check_in_date', $reservation->check_in_date)" required />
+                    <x-input-error class="mt-2" :messages="$errors->get('check_in_date')" />
+                </div>
 
-                <label for="check_out_date">Check-out Date:</label>
-                <input type="date" name="check_out_date" id="check_out_date" value="{{ $reservation->check_out_date }}">
-                <br>
-                <br>
+                <div>
+                    <x-input-label for="check_out_date" :value="__('Check-out Date')" />
+                    <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" :value="old('check_out_date', $reservation->check_out_date)" required />
+                    <x-input-error class="mt-2" :messages="$errors->get('check_out_date')" />
+                </div>
 
-                <label for="room_type">Room Type:</label>
-                <select name="room_type" id="room_type">
-                    <option value="single">Single</option>
-                    <option value="double">Double</option>
-                    <option value="triple">Triple</option>
-                </select>
-                <br>
-                <br>
+                <div>
+                    <label for="room_type">Room Type:</label>
+                    <select name="room_type" id="room_type">
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="triple">Triple</option>
+                    </select>
+                </div>
 
-                <label for="number_of_guests">Number of Guests:</label>
-                <input type="number" name="number_of_guests" id="number_of_guests" value="{{ $reservation->number_of_guests }}">
-                <br>
-                <br>
+                <div>
+                    <x-input-label for="number_of_guests" :value="__('Number of Guests')" />
+                    <x-text-input type="number" name="number_of_guests" id="number_of_guests" class="mt-1 block w-full" :value="old('number_of_guests', $reservation->number_of_guests)" required />
+                    <x-input-error class="mt-2" :messages="$errors->get('number_of_guests')" />
+                </div>
 
-                <button>Submit</button>
+                <x-primary-button>{{ __('Save') }}</x-primary-button>
             </form>
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-            @endif
         </div>
     </div>
 </x-app-layout>
