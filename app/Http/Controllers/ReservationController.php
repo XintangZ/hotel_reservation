@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 
 class ReservationController extends Controller
@@ -30,25 +32,14 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ReservationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        $this->validate($request, [
-            'check_in_date' => 'required',
-            'check_out_date' => 'required',
-            'room_type' => 'required',
-            'number_of_guests' => 'required',
-        ]);
-
-        $reservation = Reservation::create([
-            'user_id' => $request->user_id,
-            'check_in_date' => $request->check_in_date,
-            'check_out_date' => $request->check_out_date,
-            'room_type' => $request->room_type,
-            'number_of_guests' => $request->number_of_guests,
-        ]);
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $reservation = new Reservation($data);
 
         $reservation->save();
         return redirect('/dashboard')->with('successMsg', 'Reservation created successfully!');
@@ -80,21 +71,14 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ReservationRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReservationRequest $request, $id)
     {
-        $this->validate($request, [
-            'check_in_date' => 'required',
-            'check_out_date' => 'required',
-            'room_type' => 'required',
-            'number_of_guests' => 'required',
-        ]);
-
         $reservation = Reservation::find($id);
-        $reservation->fill($request->all());
+        $reservation->fill($request->validated());
 
         $reservation->save();
         return redirect('/dashboard')->with('successMsg', 'Reservation updated successfully!');

@@ -23,18 +23,21 @@ Route::get('/', function () {
 
 // create reservation
 Route::get('/new', 'App\Http\Controllers\ReservationController@create')->name('reservation.create');
-Route::post('/new', 'App\Http\Controllers\ReservationController@store')->name('reservation.store');
-// edit reservation
-Route::get('/edit/{id}', 'App\Http\Controllers\ReservationController@edit')->name('reservation.edit');
-Route::patch('/edit/{id}', 'App\Http\Controllers\ReservationController@update')->name('reservation.update');
-// delete reservation
-Route::delete('/delete/{id}', 'App\Http\Controllers\ReservationController@destroy')->name('reservation.delete');
+Route::post('/new', 'App\Http\Controllers\ReservationController@store')->middleware(['auth', 'verified'])->name('reservation.store');
+
+// edit & delete reservation
+Route::middleware('auth')->group(function () {
+    Route::get('/edit/{id}', 'App\Http\Controllers\ReservationController@edit')->name('reservation.edit');
+    Route::patch('/edit/{id}', 'App\Http\Controllers\ReservationController@update')->name('reservation.update');
+    Route::delete('/delete/{id}', 'App\Http\Controllers\ReservationController@destroy')->name('reservation.delete');
+});
 
 // user home page
 Route::get('/dashboard', function () {
     $reservations = Reservation::where('user_id', Auth::id())->paginate(5);
     return view('dashboard', compact('reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 // edit & delete user
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

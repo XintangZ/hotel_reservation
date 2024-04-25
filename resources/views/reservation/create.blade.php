@@ -13,7 +13,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <form action="{{ route('reservation.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                 <label for="check_in_date">Check-in Date:</label>
                 <input type="date" name="check_in_date" id="check_in_date">
