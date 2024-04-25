@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('phone_number')->unique();
+            $table->string('phone')->unique();
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->string('room_type');

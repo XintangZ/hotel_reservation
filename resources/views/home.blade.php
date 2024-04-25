@@ -21,7 +21,7 @@
                         <th>First  Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
-                        <th>Phone Number</th>
+                        <th>Phone</th>
                         <th>Check-in Date</th>
                         <th>Check-out Date</th>
                         <th>Room Type</th>
@@ -35,7 +35,7 @@
                         <td>{{ $reservation->first_name }}</td>
                         <td>{{ $reservation->last_name }}</td>
                         <td>{{ $reservation->email }}</td>
-                        <td>{{ $reservation->phone_number }}</td>
+                        <td>{{ $reservation->phone }}</td>
                         <td>{{ $reservation->check_in_date }}</td>
                         <td>{{ $reservation->check_out_date }}</td>
                         <td>{{ $reservation->room_type }}</td>

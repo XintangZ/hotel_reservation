@@ -22,8 +22,8 @@
         <br>
         <br>
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" name="phone_number" id="phone_number">
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" id="phone">
         <br>
         <br>
 

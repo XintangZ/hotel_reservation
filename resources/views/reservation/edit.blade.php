@@ -23,8 +23,8 @@
         <br>
         <br>
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" name="phone_number" id="phone_number" value="{{ $reservation->phone_number }}">
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" id="phone" value="{{ $reservation->phone }}">
         <br>
         <br>
 

@@ -13,7 +13,7 @@ class Reservation extends Model
         'first_name',
         'last_name',
         'email',
-        'phone_number',
+        'phone',
         'check_in_date',
         'check_out_date',
         'room_type',
