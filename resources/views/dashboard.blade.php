@@ -23,6 +23,7 @@
                         <th>Check-out Date</th>
                         <th>Room Type</th>
                         <th>Number of Guests</th>
+                        <th>Number of Nights</th>                        
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                         <td>{{ $reservation->check_out_date }}</td>
                         <td>{{ $reservation->room_type }}</td>
                         <td>{{ $reservation->number_of_guests }}</td>
+                        <td>{{ $reservation->number_of_nights }}</td>
                         <td>
                             <a href="{{ route('reservation.edit', $reservation->id) }}">Edit</a>
                             <form action="{{ route('reservation.delete', $reservation->id) }}"" method="post">

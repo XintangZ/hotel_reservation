@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('check_in_date');
             $table->date('check_out_date');
+            $table->integer('number_of_nights');
             $table->string('room_type');
             $table->integer('number_of_guests');
             $table->timestamps();
