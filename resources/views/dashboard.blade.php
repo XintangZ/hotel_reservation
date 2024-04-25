@@ -11,11 +11,41 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+
+            @if (session('successMsg'))
+            <p>{{ session('successMsg') }}</p>
+            @endif
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Check-in Date</th>
+                        <th>Check-out Date</th>
+                        <th>Room Type</th>
+                        <th>Number of Guests</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reservations as $reservation)
+                    <tr>
+                        <td>{{ $reservation->check_in_date }}</td>
+                        <td>{{ $reservation->check_out_date }}</td>
+                        <td>{{ $reservation->room_type }}</td>
+                        <td>{{ $reservation->number_of_guests }}</td>
+                        <td>
+                            <a href="{{ route('reservation.edit', $reservation->id) }}">Edit</a>
+                            <form action="{{ route('reservation.delete', $reservation->id) }}"" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $reservations->links() }}
         </div>
     </div>
 </x-app-layout>

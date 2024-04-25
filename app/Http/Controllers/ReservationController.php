@@ -36,10 +36,6 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
             'check_in_date' => 'required',
             'check_out_date' => 'required',
             'room_type' => 'required',
@@ -47,10 +43,7 @@ class ReservationController extends Controller
         ]);
 
         $reservation = Reservation::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'user_id' => $request->user_id,
             'check_in_date' => $request->check_in_date,
             'check_out_date' => $request->check_out_date,
             'room_type' => $request->room_type,
@@ -58,7 +51,7 @@ class ReservationController extends Controller
         ]);
 
         $reservation->save();
-        return redirect('/')->with('successMsg', 'Reservation created successfully!');
+        return redirect('/dashboard')->with('successMsg', 'Reservation created successfully!');
     }
 
     /**
@@ -94,10 +87,6 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
             'check_in_date' => 'required',
             'check_out_date' => 'required',
             'room_type' => 'required',
@@ -108,7 +97,7 @@ class ReservationController extends Controller
         $reservation->fill($request->all());
 
         $reservation->save();
-        return redirect('/')->with('successMsg', 'Reservation updated successfully!');
+        return redirect('/dashboard')->with('successMsg', 'Reservation updated successfully!');
     }
 
     /**
@@ -120,7 +109,7 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         Reservation::find($id)->delete();
-        return redirect('/')->with('successMsg', 'Reservation deleted successfully!');
+        return redirect('/dashboard')->with('successMsg', 'Reservation deleted successfully!');
     }
 
     /**

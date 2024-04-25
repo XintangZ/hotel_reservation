@@ -32,7 +32,8 @@ Route::delete('/delete/{id}', 'App\Http\Controllers\ReservationController@destro
 
 // user home page
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $reservations = Reservation::where('user_id', Auth::id())->paginate(5);
+    return view('dashboard', compact('reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 // edit & delete user
 Route::middleware('auth')->group(function () {
