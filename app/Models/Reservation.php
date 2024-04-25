@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Reservation extends Model
 {
@@ -16,4 +17,9 @@ class Reservation extends Model
         'room_type',
         'number_of_guests',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

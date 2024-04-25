@@ -17,8 +17,7 @@ use App\Models\Reservation;
 
 // home page
 Route::get('/', function () {
-    $reservations = Reservation::paginate(5);
-    return view('home', compact('reservations'));
+    return view('home');
 })->name('home');
 
 // create reservation
@@ -34,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
 // user home page
 Route::get('/dashboard', function () {
-    $reservations = Reservation::where('user_id', Auth::id())->paginate(5);
+    $reservations = Auth::user()->reservations()->paginate(5);
     return view('dashboard', compact('reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
