@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Reservation;
+use App\Models\RoomType;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,8 @@ use App\Models\Reservation;
 
 // home page
 Route::get('/', function () {
-    return view('home');
+    $rooms = RoomType::all();
+    return view('home', compact('rooms'));
 })->name('home');
 
 // create reservation

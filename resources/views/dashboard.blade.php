@@ -21,7 +21,7 @@
                     <tr>
                         <th>Check-in Date</th>
                         <th>Check-out Date</th>
-                        <th>Room Type</th>
+                        <th>Room Number</th>
                         <th>Number of Guests</th>
                         <th>Number of Nights</th>                        
                         <th>Actions</th>
@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{ $reservation->check_in_date }}</td>
                         <td>{{ $reservation->check_out_date }}</td>
-                        <td>{{ $reservation->room_type }}</td>
+                        <td>{{ $reservation->room()->first()->room_number }}</td>
                         <td>{{ $reservation->number_of_guests }}</td>
                         <td>{{ $reservation->number_of_nights }}</td>
                         <td>

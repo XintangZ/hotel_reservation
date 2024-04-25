@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use App\Models\User;
+use App\Models\Room;
 
 class Reservation extends Model
 {
@@ -13,16 +14,22 @@ class Reservation extends Model
 
     protected $fillable = [
         'user_id',
+        'room_id',
         'check_in_date',
         'check_out_date',
-        'room_type',
         'number_of_guests',
         'number_of_nights',
+        'total_price',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
     }
 
     public function calculateNumberOfNights()
@@ -32,10 +39,17 @@ class Reservation extends Model
         $this->number_of_nights = $checkOut->diffInDays($checkIn);
     }
 
+    public function calculateTotalPrice()
+    {
+        $pricePerNight = Room::find($this->room_id)->roomType()->first()->price_per_night;
+        $this->total_price = $pricePerNight * $this->number_of_nights;
+    }
+
     protected static function booted()
     {
         static::saving(function ($reservation) {
             $reservation->calculateNumberOfNights();
+            $reservation->calculateTotalPrice();
         });
     }
 }
