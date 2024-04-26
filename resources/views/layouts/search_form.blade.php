@@ -1,4 +1,5 @@
 <form action="{{ route('reservation.create') }}" method="GET" class="row g-3" novalidate>
+    <!-- TODO: change class names -->
     <div class="col-6 col-md-3 col-xl-4">
         <x-input-label for="check_in_date" :value="__('Check-in Date')" />
         <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" :value="old('check_in_date', \Carbon\Carbon::tomorrow()->toDateString())" min="{{ \Carbon\Carbon::today()->toDateString() }}" />

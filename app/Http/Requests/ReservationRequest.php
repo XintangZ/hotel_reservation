@@ -16,6 +16,8 @@ class ReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => [Rule::exists('users', 'id')],
+            'room_id' => [Rule::exists('room_types', 'id')],
             'check_in_date' => ['required', 'date', 'after_or_equal:today'],
             'check_out_date' => ['required', 'date', 'after:check_in_date'],
             'number_of_guests' => ['required', 'integer', 'between:1,4'],
