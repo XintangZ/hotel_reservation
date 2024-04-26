@@ -16,12 +16,12 @@
                 <input type="hidden" name="check_out_date" value="{{ $params['check_out_date'] }}">
                 <input type="hidden" name="number_of_guests" value="{{ $params['number_of_guests'] }}">
 
-                <div class="row">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach ($availableRooms as $roomTypeId => $rooms)
                     @php
                         $roomType = \App\Models\RoomType::find($roomTypeId);
                     @endphp
-                    <div class="col-md-6 col-xl-4 flex justify-center mb-5">
+                    <div class="flex justify-center">
                         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                             <a href="#">
                                 <img class="rounded-t-lg" src="img/{{ strtolower($roomType->room_type) }}.jpg" alt="{{ strtolower($roomType->room_type) }}-room-interior" />
