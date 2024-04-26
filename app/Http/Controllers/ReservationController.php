@@ -23,28 +23,27 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ReservationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request = null)
+    public function create(ReservationRequest $request)
     {
-        if ($request) {
-            $request->validate([
-                'check_in_date' => 'required|date|afterOrEqual:today',
-                'check_out_date' => 'required|date|after:check_in_date',
-                'number_of_guests' => 'required|integer|between:1,4',
-            ]);
-        } else {
-            $request = new Request([
-                'check_in_date' => Carbon::today()->toDateString(),
-                'check_out_date' => Carbon::today()->toDateString(),
-                'number_of_guests' => 1,
-            ]);
+        if ($request->all()) {
+            $request->validated();
         }
 
-        $availableRooms = Reservation::getAvailableRooms($request->check_in_date, $request->check_out_date, $request->number_of_guests);
+        $checkInDate = $request->query('check_in_date', Carbon::today()->toDateString());
+        $checkOutDate = $request->query('check_out_date', Carbon::tomorrow()->toDateString());
+        $numberOfGuests = $request->query('number_of_guests', 1);
+        $params=[
+            'check_in_date' => $checkInDate,
+            'check_out_date' => $checkOutDate,
+            'number_of_guests' => $numberOfGuests,
+        ];
 
-        return view('reservation.create', compact('request'));
+        $availableRooms = Reservation::getAvailableRooms($checkInDate, $checkOutDate, $numberOfGuests);
+
+        return view('reservation.create', compact('params', 'availableRooms'));
     }
 
     /**

@@ -17,9 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('room_number')->unique();
             $table->foreignIdFor(\App\Models\RoomType::class);
-            // $table->unsignedBigInteger('room_type_id');
             $table->timestamps();
-            // $table->foreign('room_type_id')->references('id')->on('room_types');
         });
     }
 
