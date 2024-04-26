@@ -14,7 +14,7 @@
             <form action="{{ route('reservation.update', $reservation->id) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PATCH')
-
+<!-- TODO: edit reservation form -->
                 <div>
                     <x-input-label for="check_in_date" :value="__('Check-in Date')" />
                     <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" :value="old('check_in_date', $reservation->check_in_date)" required />
