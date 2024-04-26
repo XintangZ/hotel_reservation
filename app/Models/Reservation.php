@@ -42,10 +42,10 @@ class Reservation extends Model
             $availableRooms[$roomType->room_type] = $rooms;
         }
 
-        foreach ($availableRooms as $roomType) {
-            foreach ($roomType as $key => $room) {
+        foreach ($availableRooms as $roomType => $rooms) {
+            foreach ($rooms as $key => $room) {
                 if (!$room->isAvailable($checkInDate, $checkOutDate)) {
-                    unset($suitableRooms[$roomType][$key]);
+                    unset($availableRooms[$roomType][$key]);
                 }
             }
         }

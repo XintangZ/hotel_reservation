@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 
 // user home page
 Route::get('/dashboard', function () {
-    $reservations = Auth::user()->reservations()->paginate(5);
+    $reservations = Auth::user()->reservations()->orderBy('created_at', 'desc')->paginate(5);
     return view('dashboard', compact('reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 

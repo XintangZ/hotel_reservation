@@ -23,7 +23,7 @@ class ReservationFactory extends Factory
         return [
             'user_id'=>$this->faker->randomElement($userIds),
             'room_id'=>$this->faker->randomElement($roomIds),
-            'check_in_date' => $this->faker->dateTimeThisYear(),
+            'check_in_date' => $this->faker->dateTimeThisYear('+4 months'),
             'check_out_date' => function (array $attributes) {
                 $checkInDate = $attributes['check_in_date'];
                 $daysToAdd = $this->faker->numberBetween(1, 15);
