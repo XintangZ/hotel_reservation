@@ -23,9 +23,11 @@
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach ($availableRooms as $roomTypeId => $rooms)
+
                     @php
                         $roomType = \App\Models\RoomType::find($roomTypeId);
                     @endphp
+                    
                     <div class="flex justify-center">
                         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                             <a href="#">
@@ -38,8 +40,10 @@
                                         <b class="text-[28px]">C${{ $roomType->price_per_night }}</b>
                                     </h5>
                                 </a>
-                                <p class="mb-3 font-normal text-gray-700">{{ $rooms->count() }} available {{ $rooms->count() === 1 ? 'room' : 'rooms' }}</p>
-                                <p class="mb-3 font-normal text-gray-700">Capacity: {{ $roomType->capacity }} {{ $roomType->capacity === 1 ? 'guest' : 'guests' }}</p>
+                                <p class="mb-3 font-normal text-gray-700">
+                                    {{ $rooms->count() }} {{ $rooms->count() === 1 ? 'room' : 'rooms' }} available<br>
+                                    Capacity: {{ $roomType->capacity }} {{ $roomType->capacity === 1 ? 'guest' : 'guests' }}
+                                </p>
                                 <button data-modal-target="select-{{ $roomType->room_type }}-modal" data-modal-toggle="select-{{ $roomType->room_type }}-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" type="button">
                                 Book Now
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -75,6 +79,7 @@
                                                             <div class="block">
                                                                 <div class="w-full text-lg font-semibold">{{ $room->room_number }}</div>
                                                                 <div class="w-full text-gray-500">Flowbite</div>
+                                                                <!-- TODO: add price -->
                                                             </div>
                                                             <svg class="w-4 h-4 ms-3 rtl:rotate-180 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
                                                         </label>
@@ -82,8 +87,7 @@
                                                     @endforeach
                                                 </ul>
                                                 <button class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">
-                                                    Confirm Booking
-                                                    <!-- TODO: go to payment -->
+                                                    Confirm Reservation
                                                 </button>
                                             </div>
                                         </div>

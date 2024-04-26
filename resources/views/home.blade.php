@@ -17,4 +17,4 @@
     </div>
 </x-app-layout>
 
-// TODO: add content to home page
+<!-- TODO: add content to home page -->

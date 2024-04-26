@@ -109,8 +109,15 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        Reservation::find($id)->delete();
-        return redirect('/dashboard')->with('successMsg', 'Reservation deleted successfully!');
+        $reservation = Reservation::find($id);
+
+        $successMsg = 'Reservation canceled successfully!';
+        if ($reservation->check_in_date < Carbon::now()->format('Y-m-d')) {
+            $successMsg = 'Reservation deleted successfully!';
+        }
+
+        $reservation->delete();
+        return redirect('/dashboard')->with('successMsg', $successMsg);
     }
 
     /**
