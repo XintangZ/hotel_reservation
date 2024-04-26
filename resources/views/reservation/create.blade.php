@@ -9,6 +9,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @php
+                $resultCount = count(\Illuminate\Support\Arr::flatten($availableRooms));
+            @endphp
+            <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
+            <p class="my-3 text-md text-gray-600">{{$resultCount}} available {{ $resultCount === 1 ? ' room' : 'rooms'}} found</p>
             <form action="{{ route('reservation.store') }}" method="POST">
                 @csrf
 
@@ -33,8 +38,8 @@
                                         <b class="text-[28px]">C${{ $roomType->price_per_night }}</b>
                                     </h5>
                                 </a>
-                                <p class="mb-3 font-normal text-gray-700">{{ $rooms->count() }} available rooms</p>
-                                <p class="mb-3 font-normal text-gray-700">Capacity: {{ $roomType->capacity }} guests</p>
+                                <p class="mb-3 font-normal text-gray-700">{{ $rooms->count() }} available {{ $rooms->count() === 1 ? 'room' : 'rooms' }}</p>
+                                <p class="mb-3 font-normal text-gray-700">Capacity: {{ $roomType->capacity }} {{ $roomType->capacity === 1 ? 'guest' : 'guests' }}</p>
                                 <button data-modal-target="select-{{ $roomType->room_type }}-modal" data-modal-toggle="select-{{ $roomType->room_type }}-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" type="button">
                                 Book Now
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

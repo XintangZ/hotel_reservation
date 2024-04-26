@@ -21,7 +21,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 flex flex-col">
             @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -33,12 +33,14 @@
             </header>
         @endif
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
 
-        @include('layouts.footer')
+            <div class="grow flex flex-col-reverse">
+                @include('layouts.footer')
+            </div>
         </div>
 
         <!-- Bootstrap -->
@@ -46,5 +48,6 @@
 
         <!-- FlowBite -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     </body>
 </html>
