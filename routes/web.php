@@ -18,8 +18,7 @@ use App\Models\RoomType;
 
 // home page
 Route::get('/', function () {
-    $rooms = RoomType::all();
-    return view('home', compact('rooms'));
+    return view('home');
 })->name('home');
 
 // create reservation

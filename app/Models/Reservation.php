@@ -39,7 +39,7 @@ class Reservation extends Model
         $availableRooms = [];
         foreach ($suitableRoomTypes as $roomType) {
             $rooms = $roomType->rooms()->get();
-            $availableRooms[$roomType->room_type] = $rooms;
+            $availableRooms[$roomType->id] = $rooms;
         }
 
         foreach ($availableRooms as $roomType => $rooms) {
