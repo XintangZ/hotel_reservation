@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Room;
+use App\Models\RoomType;
 
 class Reservation extends Model
 {
@@ -30,6 +31,23 @@ class Reservation extends Model
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function getAvailableRooms($checkIn, $checkOut, $numberOfGuests) {
+        $suitableRoomTypes = RoomType::where('capacity', '>=', $numberOfGuests)->get();
+
+        foreach ($suitableRoomTypes as $roomType) {
+            $roomType->rooms()->get();
+
+        }
+
+        foreach ($rooms as $room) {
+            if (Room::find($room->id)->isAvailable($checkIn, $checkOut)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function calculateNumberOfNights()

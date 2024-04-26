@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
+use Illuminate\Support\Carbon;
 
 class ReservationController extends Controller
 {
@@ -22,11 +23,28 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request = null)
     {
-        return view('reservation.create');
+        if ($request) {
+            $request->validate([
+                'check_in_date' => 'required|date|afterOrEqual:today',
+                'check_out_date' => 'required|date|after:check_in_date',
+                'number_of_guests' => 'required|integer|between:1,4',
+            ]);
+        } else {
+            $request = new Request([
+                'check_in_date' => Carbon::today()->toDateString(),
+                'check_out_date' => Carbon::today()->toDateString(),
+                'number_of_guests' => 1,
+            ]);
+        }
+
+        $availableRooms = Reservation::getAvailableRooms($request->check_in_date, $request->check_out_date, $request->number_of_guests);
+
+        return view('reservation.create', compact('request'));
     }
 
     /**

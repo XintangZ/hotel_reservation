@@ -4,11 +4,7 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <form action="{{ route('reservation.create') }}" method="GET" class="">                
-                <button type="submit" class="btn btn-primary">Check Availability</button>
-            </form>
-        </h2>
+        @include('layouts.search_form')
     </x-slot>
 
     <div class="py-12">
