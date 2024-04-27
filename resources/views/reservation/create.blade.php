@@ -60,7 +60,7 @@
                     <div class="flex justify-center">
                         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                             <a href="#">
-                                <img class="rounded-t-lg" src="img/{{ strtolower($roomType->room_type) }}.jpg" alt="{{ strtolower($roomType->room_type) }}-room-interior" />
+                                <img class="rounded-t-lg" src="/img/{{ strtolower($roomType->room_type) }}.jpg" alt="{{ strtolower($roomType->room_type) }}-room-interior" />
                             </a>
                             <div class="p-5">
                                 <a href="#">

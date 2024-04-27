@@ -33,7 +33,7 @@ class Reservation extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public static function getAvailableRooms($checkInDate, $checkOutDate, $numberOfGuests) {
+    public static function getAvailableRooms($checkInDate, $checkOutDate, $numberOfGuests, $roomId = null) {
         $suitableRoomTypes = RoomType::where('capacity', '>=', $numberOfGuests)->get();
 
         $availableRooms = [];
@@ -44,7 +44,7 @@ class Reservation extends Model
 
         foreach ($availableRooms as $roomType => $rooms) {
             foreach ($rooms as $key => $room) {
-                if (!$room->isAvailable($checkInDate, $checkOutDate)) {
+                if (!$room->isAvailable($checkInDate, $checkOutDate) && $roomId != $room->id) {
                     unset($availableRooms[$roomType][$key]);
                 }
             }
