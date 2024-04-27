@@ -4,11 +4,6 @@
     3. else, the user must re-select a room
     4. if the user wants to change a room, display available rooms
  -->
-
-@php
-    $reservation = session()->get('reservationToEdit');
-@endphp
-
 <x-app-layout>
     <x-slot name="title">
         {{ __('Change Reservation') }}
@@ -106,7 +101,7 @@
                                                 <ul class="space-y-4 mb-4">
                                                     @foreach($rooms as $room)
                                                     <li>
-                                                        <input type="radio" id="{{ $room->id }}" name="room_id" value="{{ $room->id }}" class="hidden peer" required checked="{{ $room->id == $reservation->room_id }}"/>
+                                                        <input type="radio" id="{{ $room->id }}" name="room_id" value="{{ $room->id }}" class="hidden peer" required />
                                                         <label for="{{ $room->id }}" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100">                           
                                                             <div class="block">
                                                                 <div class="w-full text-lg font-semibold">{{ $room->room_number }}</div>

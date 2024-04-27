@@ -43,8 +43,9 @@ class MainController extends Controller
             $availableRooms[$roomType->id] = $rooms;
         }
 
-        if (session()->has('reservationToEdit')) {
-            return view('reservation.edit', compact('params', 'availableRooms'));
+        if (isset($params['reservation_id'])) {
+            $reservation = Reservation::find($params['reservation_id']);
+            return view('reservation.edit', compact('params', 'reservation', 'availableRooms'));
         } else {
             return view('reservation.create', compact('params', 'availableRooms'));
         }
