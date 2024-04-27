@@ -10,7 +10,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- TODO: add content to home page -->
-            <img class="w-full" src="img/exterior.jpg" alt="">
+
+            <x-accordion />
+
         </div>
     </div>
 </x-app-layout>

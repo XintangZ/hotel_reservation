@@ -1,8 +1,6 @@
 <!-- TODO: redesign edit page
-    1. edit check_in_date, check_out_date, number_of_guest
-    2. if the user doesn't change the above info, show current room type and room number
-    3. else, the user must re-select a room
-    4. if the user wants to change a room, display available rooms
+    1. show form for editing check_in_date, check_out_date, and number_of_guest
+    2. if the user change the above info, search for available rooms base on the new info
  -->
 <x-app-layout>
     <x-slot name="title">
