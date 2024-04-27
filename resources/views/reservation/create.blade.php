@@ -21,7 +21,6 @@
             <span class="sr-only">Close menu</span>
         </button>
         <x-search-form 
-            action="{{ route('reservation.create') }}" 
             checkInDate="{{ $params['check_in_date'] }}"
             checkOutDate="{{ $params['check_out_date'] }}"
             numberOfGuests="{{ $params['number_of_guests'] }}"

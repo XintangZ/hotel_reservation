@@ -21,8 +21,11 @@ class Room extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    public function isAvailable($checkInDate, $checkOutDate) {
+    public function isAvailable($checkInDate, $checkOutDate = null) {
+        $checkOutDate = $checkOutDate ?? $checkInDate;
+        
         $isBooked = $this->reservations()->where('check_in_date', '<=', $checkOutDate)->where('check_out_date', '>=', $checkInDate);
+
         if ($isBooked->count() > 0) {
             return false;
         } else {

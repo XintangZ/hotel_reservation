@@ -33,25 +33,6 @@ class Reservation extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public static function getAvailableRooms($checkInDate, $checkOutDate, $numberOfGuests, $roomId = null) {
-        $suitableRoomTypes = RoomType::where('capacity', '>=', $numberOfGuests)->get();
-
-        $availableRooms = [];
-        foreach ($suitableRoomTypes as $roomType) {
-            $rooms = $roomType->rooms()->get();
-            $availableRooms[$roomType->id] = $rooms;
-        }
-
-        foreach ($availableRooms as $roomType => $rooms) {
-            foreach ($rooms as $key => $room) {
-                if (!$room->isAvailable($checkInDate, $checkOutDate) && $roomId != $room->id) {
-                    unset($availableRooms[$roomType][$key]);
-                }
-            }
-        }
-        return $availableRooms;
-    }
-
     public function calculateNumberOfNights()
     {
         $checkIn = Carbon::parse($this->check_in_date);

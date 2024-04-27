@@ -4,6 +4,11 @@
     3. else, the user must re-select a room
     4. if the user wants to change a room, display available rooms
  -->
+
+@php
+    $reservation = session()->get('reservationToEdit');
+@endphp
+
 <x-app-layout>
     <x-slot name="title">
         {{ __('Change Reservation') }}
@@ -27,7 +32,6 @@
             <span class="sr-only">Close menu</span>
         </button>
         <x-search-form 
-            action="{{ route('reservation.search') }}" 
             checkInDate="{{ $params['check_in_date'] }}"
             checkOutDate="{{ $params['check_out_date'] }}"
             numberOfGuests="{{ $params['number_of_guests'] }}"

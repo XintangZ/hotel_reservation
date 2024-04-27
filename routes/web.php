@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Reservation;
 use App\Models\RoomType;
@@ -18,18 +19,13 @@ use App\Models\RoomType;
 */
 
 // home page
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
+// search result page
+Route::get('/search', [MainController::class, 'search'])->name('room.search');
 
-Route::get('/search', [ReservationController::class, 'show'])->name('reservation.search');
-
-// create reservation
-Route::get('/new', [ReservationController::class, 'create'])->name('reservation.create');
-Route::post('/new', [ReservationController::class, 'store'])->middleware(['auth', 'verified'])->name('reservation.store');
-
-// edit & delete reservation
+// create & edit & delete reservation
 Route::middleware('auth')->group(function () {
+    Route::post('/new', [ReservationController::class, 'store'])->name('reservation.store');
     Route::get('/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
     Route::patch('/edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');

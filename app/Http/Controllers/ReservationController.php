@@ -17,33 +17,17 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        // return view('home');
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param  App\Http\Requests\ReservationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(ReservationRequest $request)
+    public function create()
     {
-        if ($request->all()) {
-            $request->validated();
-        }
-
-        $checkInDate = $request->query('check_in_date', Carbon::today()->toDateString());
-        $checkOutDate = $request->query('check_out_date', Carbon::tomorrow()->toDateString());
-        $numberOfGuests = $request->query('number_of_guests', 1);
-        $params=[
-            'check_in_date' => $checkInDate,
-            'check_out_date' => $checkOutDate,
-            'number_of_guests' => $numberOfGuests,
-        ];
-
-        $availableRooms = Reservation::getAvailableRooms($checkInDate, $checkOutDate, $numberOfGuests);
-
-        return view('reservation.create', compact('params', 'availableRooms'));
+        //
     }
 
     /**
@@ -75,16 +59,22 @@ class ReservationController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $reservation = Reservation::find($id);
-        $availableRooms = Reservation::getAvailableRooms($reservation->check_in_date, $reservation->check_out_date, $reservation->number_of_guests, $reservation->room_id);
+        session()->put('reservationToEdit', $reservation);
 
-        return view('reservation.edit', compact('reservation', 'availableRooms'));
+        $searchRoute = route('room.search', [
+            'check_in_date' => $reservation->check_in_date,
+            'check_out_date' => $reservation->check_out_date,
+            'number_of_guests' => $reservation->number_of_guests,
+        ]);
+
+        return redirect($searchRoute);
     }
 
     /**
@@ -100,6 +90,8 @@ class ReservationController extends Controller
         $reservation->fill($request->validated());
 
         $reservation->save();
+        session()->forget('reservationToEdit');
+        
         return redirect('/dashboard')->with('successMsg', 'Reservation updated successfully!');
     }
 
