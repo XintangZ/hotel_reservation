@@ -1,32 +1,21 @@
-@php
-    $params=$reservation;
-@endphp
-
+<!-- TODO: redesign edit page
+    1. edit check_in_date, check_out_date, number_of_guest
+    2. if the user doesn't change the above info, show current room type and room number
+    3. else, the user must re-select a room
+    4. if the user wants to change a room, display available rooms
+ -->
 <x-app-layout>
     <x-slot name="title">
         {{ __('Change Reservation') }}
     </x-slot>
 
     <x-slot name="header">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4">
-            <div class="xl:col-span-4">
-                <x-input-label for="check_in_date" :value="__('Check-in Date')" />
-                <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $params['check_in_date'] }}" min="{{ \Carbon\Carbon::today()->toDateString() }}" :disabled="true" />
-            </div>
-            <div class="xl:col-span-4">
-                <x-input-label for="check_out_date" :value="__('Check-out Date')" />
-                <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" value="{{ $params['check_out_date'] }}" :disabled="true" />
-            </div>
-            <div class="xl:col-span-2">
-                <x-input-label for="number_of_guests" :value="__('Number of Guests')" />
-                <x-text-input type="number" name="number_of_guests" id="number_of_guests" class="mt-1 block w-full" value="{{ $params['number_of_guests'] }}" :disabled="true" />
-            </div>
-            <div class="flex flex-col-reverse xl:col-span-2">
-                <x-primary-button class="h-[42px] mt-1 justify-center" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
-                    {{ __('Change Reservation Info') }}
-                </x-primary-button>
-            </div>
-        </div>
+        <x-search-form 
+            checkInDate="{{ $params['check_in_date'] }}"
+            checkOutDate="{{ $params['check_out_date'] }}"
+            numberOfGuests="{{ $params['number_of_guests'] }}"
+            disabled
+        />
     </x-slot>
 
      <!-- drawer component -->
@@ -37,7 +26,12 @@
             </svg>
             <span class="sr-only">Close menu</span>
         </button>
-        @include('layouts.search_form', $reservation)
+        <x-search-form 
+            action="{{ route('reservation.search') }}" 
+            checkInDate="{{ $params['check_in_date'] }}"
+            checkOutDate="{{ $params['check_out_date'] }}"
+            numberOfGuests="{{ $params['number_of_guests'] }}"
+        />
     </div>
 
     <div class="py-12">
