@@ -36,11 +36,6 @@
         <x-primary-button class="h-[42px] mt-1 justify-center">{{ __('Check Availability') }}</x-primary-button>
         @endif
     </div>
-    @if($errors->any())
-        @foreach ($errors->all() as $error)
-        <x-input-error class="mt-2" :messages="$error" />
-        @endforeach
-    @endif
 @if(isset($disabled))
 </div>
 @else
