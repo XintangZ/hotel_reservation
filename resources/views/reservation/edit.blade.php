@@ -1,17 +1,17 @@
 <x-app-layout>
     <x-slot name="title">
-        {{ __('Edit Reservation') }}
+        {{ __('Change Reservation') }}
     </x-slot>
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Reservation') }}
+            {{ __('Change Reservation') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('reservation.update', $reservation->id) }}" method="POST" class="space-y-6">
+            <form action="{{ route('reservation.update', $reservation->id) }}" method="POST" class="grid grid-cols-2 gap-4">
                 @csrf
                 @method('PATCH')
 <!-- TODO: edit reservation form -->

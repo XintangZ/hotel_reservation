@@ -82,7 +82,9 @@ class ReservationController extends Controller
     public function edit($id)
     {
         $reservation = Reservation::find($id);
-        return view('reservation.edit', compact('reservation'));
+        $availableRooms = Reservation::getAvailableRooms($reservation->check_in_date, $reservation->check_out_date, $reservation->number_of_guests);
+
+        return view('reservation.edit', compact('reservation', 'availableRooms'));
     }
 
     /**

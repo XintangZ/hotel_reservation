@@ -4,8 +4,37 @@
     </x-slot>
 
     <x-slot name="header">
-        @include('layouts.search_form')
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4">
+            <div class="xl:col-span-4">
+                <x-input-label for="check_in_date" :value="__('Check-in Date')" />
+                <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $params['check_in_date'] }}" min="{{ \Carbon\Carbon::today()->toDateString() }}" :disabled="true" />
+            </div>
+            <div class="xl:col-span-4">
+                <x-input-label for="check_out_date" :value="__('Check-out Date')" />
+                <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" value="{{ $params['check_out_date'] }}" :disabled="true" />
+            </div>
+            <div class="xl:col-span-2">
+                <x-input-label for="number_of_guests" :value="__('Number of Guests')" />
+                <x-text-input type="number" name="number_of_guests" id="number_of_guests" class="mt-1 block w-full" value="{{ $params['number_of_guests'] }}" :disabled="true" />
+            </div>
+            <div class="flex flex-col-reverse xl:col-span-2">
+                <x-primary-button class="h-[42px] mt-1 justify-center" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
+                    {{ __('Edit Reservation Info') }}
+                </x-primary-button>
+            </div>
+        </div>
     </x-slot>
+
+     <!-- drawer component -->
+     <div id="drawer-top-search" class="fixed top-0 left-0 right-0 z-40 w-full p-6 transition-transform -translate-y-full bg-white" tabindex="-1" aria-labelledby="drawer-top-label">
+        <button type="button" data-drawer-hide="drawer-top-search" aria-controls="drawer-top-search" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center" >
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close menu</span>
+        </button>
+        @include('layouts.search_form', $params)
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
