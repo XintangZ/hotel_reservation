@@ -41,7 +41,7 @@
                 $resultCount = count(\Illuminate\Support\Arr::flatten($availableRooms));
             @endphp
             <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
-            <p class="my-3 text-md text-gray-600">{{$resultCount}} available {{ $resultCount === 1 ? ' room' : 'rooms'}} found</p>
+            <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
             <form action="{{ route('reservation.store') }}" method="POST" novalidate>
                 @csrf
 
@@ -56,7 +56,7 @@
                     @endphp
                     <div class="shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:border-gray-600">
                         <x-card :roomType="$roomType"/>
-                        <x-accordion :rooms="$rooms" :id="$roomType->id">{{ $roomCount }} {{ $roomCount === 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
+                        <x-accordion :rooms="$rooms" :id="$roomType->id">{{ $roomCount }} {{ $roomCount <= 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
                     </div>
                 @endforeach
 
