@@ -21,4 +21,14 @@ class RoomSearchRequest extends FormRequest
             'reservation_id' => [Rule::exists('reservations', 'id')],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'check_in_date.required' => 'Please select a check-in date.',
+            'check_out_date.required' => 'Please select a check-out date.',
+            'check_out_date.after' => 'The check-out date must be after the check-in date.',
+            'number_of_guests.required' => 'Please enter the number of guests.',
+        ];
+    }
 }
