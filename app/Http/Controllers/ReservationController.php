@@ -43,7 +43,7 @@ class ReservationController extends Controller
         $reservation = new Reservation($data);
 
         $reservation->save();
-        return redirect('/dashboard')->with('successMsg', 'Reservation created successfully!');
+        return redirect('/dashboard')->with('successMsg', 'Reservation booked successfully!');
     }
 
     /**
