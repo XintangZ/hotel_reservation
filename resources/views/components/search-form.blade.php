@@ -8,7 +8,7 @@
         @if(isset($disabled))
         <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $checkInDate }}" :disabled="true" />
         @else
-        <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $checkInDate ?? \Carbon\Carbon::tomorrow()->toDateString() }}" min="{{ \Carbon\Carbon::today()->toDateString() }}" />
+        <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $checkInDate ?? \Carbon\Carbon::today()->toDateString() }}" min="{{ \Carbon\Carbon::today()->toDateString() }}" />
         @endif
     </div>
     <div class="xl:col-span-4">
@@ -16,7 +16,7 @@
         @if(isset($disabled))
         <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" value="{{ $checkOutDate }}" :disabled="true" />
         @else
-        <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" value="{{ $checkOutDate ?? \Carbon\Carbon::tomorrow()->addDays(1)->toDateString() }}" min="{{ \Carbon\Carbon::tomorrow()->toDateString() }}" />
+        <x-text-input type="date" name="check_out_date" id="check_out_date" class="mt-1 block w-full" value="{{ $checkOutDate ?? \Carbon\Carbon::tomorrow()->toDateString() }}" min="{{ \Carbon\Carbon::tomorrow()->toDateString() }}" />
         @endif
     </div>
     <div class="xl:col-span-2">
