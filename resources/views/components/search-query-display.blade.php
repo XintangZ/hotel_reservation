@@ -10,9 +10,7 @@
                 <span class="text-gray-900 text-xl xl:text-2xl font-extrabold">
                     {{ \Carbon\Carbon::parse($checkInDate)->format('M d, Y') }} - {{ \Carbon\Carbon::parse($checkOutDate)->format('M d, Y') }}
                 </span>
-                <span id="nights" class="text-gray-400 text-xl xl:text-2xl font-semibold inline-block">
-                    (2 nights)
-                </span>
+                <span id="nights" class="text-gray-400 text-xl xl:text-2xl font-semibold inline-block">&nbsp;</span>
             </h1>
         </div>
     </div>

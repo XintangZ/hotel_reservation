@@ -3,10 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkOutDateInput = document.querySelector("#check_out_date");
     const guestNumberInput = document.querySelector("#number_of_guests");
     const numberOfNightsEl = document.querySelector("#nights");
-    numberOfNightsEl.textContent = calculateNumberOfNights(
-        checkInDateInput.value,
-        checkOutDateInput.value
-    );
+
+    if (numberOfNightsEl) {
+        numberOfNightsEl.textContent = calculateNumberOfNights(
+            checkInDateInput.value,
+            checkOutDateInput.value
+        );
+    }
 
     checkInDateInput.addEventListener("change", (e) => {
         const checkOutDate = new Date(e.target.value);
