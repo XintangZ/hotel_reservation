@@ -27,6 +27,9 @@
         <x-text-input type="number" name="number_of_guests" id="number_of_guests" class="mt-1 block w-full" value="{{ $numberOfGuests ?? 1 }}" min="1" max="4" />
         @endif
     </div>
+    @if(isset($reservationId))
+    <input type="hidden" name="reservation_id" value="{{ $reservationId }}">
+    @endif
     <div class="flex flex-col-reverse xl:col-span-2">
         @if(isset($disabled))
         <x-primary-button class="h-[42px] mt-1 justify-center" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">

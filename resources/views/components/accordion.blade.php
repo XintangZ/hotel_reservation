@@ -12,14 +12,18 @@
     <div class="">
       @foreach($rooms as $room)
         <div class="divide-y group/radio">
+          @if($reservedRoomId == $room->id)
+          <input type="radio" id="{{ $room->id }}" name="room_id" value="{{ $room->id }}" class="hidden peer" required checked />
+          @else
           <input type="radio" id="{{ $room->id }}" name="room_id" value="{{ $room->id }}" class="hidden peer" required />
+          @endif
           <label for="{{ $room->id }}" class="inline-flex items-center justify-between w-full p-5 text-gray-600 bg-white cursor-pointer peer-checked:bg-gray-300 peer-checked:text-gray-800 hover:text-gray-800 hover:bg-gray-100">
               <div class="block">
                   <div class="w-full text-lg font-semibold">#{{ $room->room_number }}</div>
               </div>
               <div>
                 <x-primary-button class="hidden group-has-[:checked]/radio:block">
-                  Book Now
+                  {{ $reservedRoomId ? __('Confirm Changes') : __('Book Now') }}
                 </x-primary-button>
               </div>
           </label>

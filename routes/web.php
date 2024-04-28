@@ -27,7 +27,7 @@ Route::get('/search', [MainController::class, 'search'])->name('room.search');
 Route::middleware('auth')->group(function () {
     Route::post('/new', [ReservationController::class, 'store'])->name('reservation.store');
     Route::get('/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
-    Route::patch('/edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::post('/edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
 });
 

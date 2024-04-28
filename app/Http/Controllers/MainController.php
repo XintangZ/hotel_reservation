@@ -29,6 +29,7 @@ class MainController extends Controller
     {
         $request->validated();
         $params = $request->all();
+        $reservationToEdit = isset($params['reservation_id']) ? Reservation::find($params['reservation_id']) : null;
 
         $suitableRoomTypes = RoomType::where('capacity', '>=', $params['number_of_guests'])->get();
 
@@ -36,19 +37,14 @@ class MainController extends Controller
         foreach ($suitableRoomTypes as $roomType) {
             $rooms = $roomType->rooms()->get();
             foreach ($rooms as $key => $room) {
-                if (!$room->isAvailable($params['check_in_date'], $params['check_out_date'])) {
+                if (!$room->isAvailable($params['check_in_date'], $params['check_out_date'], $reservationToEdit)) {
                     unset($rooms[$key]);
                 }
             }
             $availableRooms[$roomType->id] = $rooms;
         }
 
-        if (isset($params['reservation_id'])) {
-            $reservation = Reservation::find($params['reservation_id']);
-            return view('reservation.edit', compact('params', 'reservation', 'availableRooms'));
-        } else {
-            return view('reservation.create', compact('params', 'availableRooms'));
-        }
+        return view('search-result', compact('params', 'availableRooms'));
     }
 
     /**

@@ -1,6 +1,11 @@
+@php
+    $reservationId = isset($params['reservation_id']) ? $params['reservation_id'] : null;
+    $reservedRoomId = $reservationId ? App\Models\Reservation::find($params['reservation_id'])->room_id : null;
+@endphp
+
 <x-app-layout>
     <x-slot name="title">
-        {{ __('New Reservation') }}
+        {{ $reservationId ? __('Change Reservation') : __('New Reservation') }}
     </x-slot>
 
     <x-slot name="header">
@@ -24,6 +29,7 @@
             checkInDate="{{ $params['check_in_date'] }}"
             checkOutDate="{{ $params['check_out_date'] }}"
             numberOfGuests="{{ $params['number_of_guests'] }}"
+            reservationId="{{ $reservationId ?? '' }}"
         />
     </div>
 
@@ -42,7 +48,7 @@
             @endphp
             <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
             <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
-            <form action="{{ route('reservation.store') }}" method="POST" novalidate>
+            <form action="{{ $reservationId ? route('reservation.update', $params['reservation_id']) : route('reservation.store') }}" method="POST" novalidate>
                 @csrf
 
                 <input type="hidden" name="check_in_date" value="{{ $params['check_in_date'] }}">
@@ -58,7 +64,7 @@
                         @if($roomCount)
                         <div class="shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:ring">
                             <x-card :roomType="$roomType"/>
-                            <x-accordion :rooms="$rooms" :id="$roomType->id">{{ $roomCount }} {{ $roomCount <= 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
+                            <x-accordion :rooms="$rooms" :id="$roomType->id" :reservedRoomId="$reservedRoomId">{{ $roomCount }} {{ $roomCount <= 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
                         </div>
                         @else
                         <div class="order-last shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:ring">
@@ -69,9 +75,7 @@
                     @endforeach
                 </div>
 
-                <x-primary-button>
-                  Book Now
-                </x-primary-button>
+                <x-primary-button>{{ $reservationId ? __('Confirm Changes') : __('Book Now') }}</x-primary-button>
             </form>
         </div>
     </div>
