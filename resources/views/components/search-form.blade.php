@@ -27,7 +27,7 @@
         <x-text-input type="number" name="number_of_guests" id="number_of_guests" class="mt-1 block w-full" value="{{ $numberOfGuests ?? 1 }}" min="1" max="4" />
         @endif
     </div>
-    @if(isset($reservationId))
+    @if(isset($reservationId) && !empty($reservationId))
     <input type="hidden" name="reservation_id" value="{{ $reservationId }}">
     @endif
     <div class="flex flex-col-reverse xl:col-span-2">

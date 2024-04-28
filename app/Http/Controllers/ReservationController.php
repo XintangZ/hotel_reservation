@@ -89,7 +89,7 @@ class ReservationController extends Controller
         $reservation->fill($request->validated());
 
         $reservation->save();
-        return redirect('/dashboard')->with('successMsg', 'Reservation updated successfully!');
+        return redirect('/dashboard')->with('successMsg', 'Reservation changed successfully!');
     }
 
     /**
@@ -102,7 +102,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id);
 
-        $successMsg = 'Reservation canceled successfully!';
+        $successMsg = 'Reservation cancelled successfully!';
         if ($reservation->check_in_date < Carbon::now()->format('Y-m-d')) {
             $successMsg = 'Reservation deleted successfully!';
         }

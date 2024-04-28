@@ -24,10 +24,14 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link
-                        :href="route('dashboard')"
-                        :active="request()->routeIs('dashboard')"
+                        :href="route('room.search', [
+                                    'check_in_date' => \Carbon\Carbon::today()->toDateString(),
+                                    'check_out_date' => \Carbon\Carbon::tomorrow()->toDateString(),
+                                    'number_of_guests' => 1,
+                                ])"
+                        :active="request()->routeIs('room.search')"
                     >
-                        {{ __("My Reservations") }}
+                        {{ __("Rooms") }}
                     </x-nav-link>
                 </div>
             </div>
@@ -141,10 +145,14 @@
 
         <div class="pb-3 space-y-1">
             <x-responsive-nav-link
-                :href="route('dashboard')"
-                :active="request()->routeIs('dashboard')"
+                :href="route('room.search', [
+                            'check_in_date' => \Carbon\Carbon::today()->toDateString(),
+                            'check_out_date' => \Carbon\Carbon::tomorrow()->toDateString(),
+                            'number_of_guests' => 1,
+                        ])"
+                :active="request()->routeIs('room.search')"
             >
-                {{ __("My Reservations") }}
+                {{ __("Rooms") }}
             </x-responsive-nav-link>
         </div>
 
