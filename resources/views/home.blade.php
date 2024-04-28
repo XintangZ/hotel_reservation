@@ -3,6 +3,10 @@
         {{ __("Home") }}
     </x-slot>
 
+    <x-slot name="scripts">
+        @vite(['resources/js/search.js'])
+    </x-slot>
+
     <x-slot name="header">
         <x-search-form>{{ __('Check Availability') }}</x-search-form>
     </x-slot>

@@ -8,6 +8,10 @@
         {{ $reservationId ? __('Change Reservation') : __('New Reservation') }}
     </x-slot>
 
+    <x-slot name="scripts">
+        @vite(['resources/js/search.js'])
+    </x-slot>
+
     <x-slot name="header">
         <x-search-form 
             checkInDate="{{ $params['check_in_date'] }}"
