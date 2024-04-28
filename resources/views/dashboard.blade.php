@@ -17,7 +17,7 @@
             @endif
 
             @if($reservations->count() === 0)
-            <p class="text-center text-lg font-semibold uppercase tracking-widest text-gray-300 my-12 py-12">You have no reservation.</p>
+            <p class="text-center text-lg font-semibold uppercase tracking-widest text-gray-300 my-12 py-12">{{ __('You have no reservation.') }}</p>
             @else
                 @foreach ($reservations as $reservation)
                 <div class="bg-gray-50 border border-gray-200 rounded-lg p-8 md:p-12 mb-8">

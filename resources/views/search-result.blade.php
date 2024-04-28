@@ -30,7 +30,7 @@
             checkOutDate="{{ $params['check_out_date'] }}"
             numberOfGuests="{{ $params['number_of_guests'] }}"
             reservationId="{{ $reservationId ?? '' }}"
-        />
+        >{{ __('Update') }}</x-search-form>
     </div>
 
     <div class="py-12">

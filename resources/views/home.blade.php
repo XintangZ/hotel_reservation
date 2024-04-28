@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-slot name="header">
-        <x-search-form />
+        <x-search-form>{{ __('Check Availability') }}</x-search-form>
     </x-slot>
 
     <div class="py-12">

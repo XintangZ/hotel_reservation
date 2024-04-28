@@ -36,7 +36,7 @@
             {{ __('Edit Reservation Info') }}
         </x-primary-button>
         @else
-        <x-primary-button class="h-[42px] mt-1 justify-center">{{ __('Check Availability') }}</x-primary-button>
+        <x-primary-button class="h-[42px] mt-1 justify-center">{{ $slot }}</x-primary-button>
         @endif
     </div>
 @if(isset($disabled))
