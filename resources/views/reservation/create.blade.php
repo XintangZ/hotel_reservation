@@ -49,16 +49,25 @@
                 <input type="hidden" name="check_out_date" value="{{ $params['check_out_date'] }}">
                 <input type="hidden" name="number_of_guests" value="{{ $params['number_of_guests'] }}">
 
-                @foreach ($availableRooms as $roomTypeId => $rooms)
-                    @php
-                        $roomType = \App\Models\RoomType::find($roomTypeId);
-                        $roomCount = count($rooms);
-                    @endphp
-                    <div class="shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:border-gray-600">
-                        <x-card :roomType="$roomType"/>
-                        <x-accordion :rooms="$rooms" :id="$roomType->id">{{ $roomCount }} {{ $roomCount <= 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
-                    </div>
-                @endforeach
+                <div class="flex flex-col">
+                    @foreach ($availableRooms as $roomTypeId => $rooms)
+                        @php
+                            $roomType = \App\Models\RoomType::find($roomTypeId);
+                            $roomCount = count($rooms);
+                        @endphp
+                        @if($roomCount)
+                        <div class="shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:ring">
+                            <x-card :roomType="$roomType"/>
+                            <x-accordion :rooms="$rooms" :id="$roomType->id">{{ $roomCount }} {{ $roomCount <= 1 ? 'Room' : 'Rooms' }} Available</x-accordion>
+                        </div>
+                        @else
+                        <div class="order-last shadow border border-grey-200 divide-y mb-5 bg-white has-[:checked]:ring">
+                            <x-card :roomType="$roomType"/>
+                            <div class="flex items-center justify-between w-full p-5 font-semibold text-gray-500 uppercase tracking-widest font-medium rtl:text-right bg-gray-300 gap-3">Sold Out</div>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
 
                 <x-primary-button>
                   Book Now

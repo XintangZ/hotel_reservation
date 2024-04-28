@@ -27,7 +27,7 @@
                         :href="route('dashboard')"
                         :active="request()->routeIs('dashboard')"
                     >
-                        {{ __("Dashboard") }}
+                        {{ __("My Reservations") }}
                     </x-nav-link>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                 :href="route('dashboard')"
                 :active="request()->routeIs('dashboard')"
             >
-                {{ __("Dashboard") }}
+                {{ __("My Reservations") }}
             </x-responsive-nav-link>
         </div>
 
