@@ -14,7 +14,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        {{ $scripts }}
+
+        @if(isset($scripts))
+            {{ $scripts }}
+        @endif
         
         <!-- FlowBite -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />

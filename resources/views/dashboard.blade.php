@@ -20,7 +20,7 @@
             <p class="text-center text-lg font-semibold uppercase tracking-widest text-gray-300 my-12 py-12">{{ __('You have no reservation.') }}</p>
             @else
                 @foreach ($reservations as $reservation)
-                <div class="bg-gray-50 border border-gray-200 rounded-lg p-8 md:p-12 mb-8">
+                <div class="bg-gray-50 border border-gray-200 sm:rounded-lg p-4 sm:p-8 md:p-12 mb-8">
                     <p class="bg-blue-100 text-blue-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2">
                         {{ $reservation->number_of_nights }} {{ $reservation->number_of_nights === 1 ? 'night' : 'nights' }}
                     </p>

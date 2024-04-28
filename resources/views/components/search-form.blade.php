@@ -1,7 +1,7 @@
 @if(isset($disabled))
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4">
+<div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4">
 @else
-<form action="{{ route('room.search') }}" method="GET" class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4" novalidate>
+<form action="{{ route('room.search') }}" method="GET" class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4" novalidate>
 @endif
     <div class="xl:col-span-4">
         <x-input-label for="check_in_date" :value="__('Check-in Date')" />
@@ -33,7 +33,7 @@
     <div class="flex flex-col-reverse xl:col-span-2">
         @if(isset($disabled))
         <x-primary-button class="h-[42px] mt-1 justify-center" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
-            {{ __('Edit Reservation Info') }}
+            {{ __('Edit Stay') }}
         </x-primary-button>
         @else
         <x-primary-button class="h-[42px] mt-1 justify-center">{{ $slot }}</x-primary-button>

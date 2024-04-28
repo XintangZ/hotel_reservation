@@ -13,11 +13,10 @@
     </x-slot>
 
     <x-slot name="header">
-        <x-search-form 
+        <x-search-query-display 
             checkInDate="{{ $params['check_in_date'] }}"
             checkOutDate="{{ $params['check_out_date'] }}"
             numberOfGuests="{{ $params['number_of_guests'] }}"
-            disabled
         />
     </x-slot>
 
@@ -50,8 +49,12 @@
             @php
                 $resultCount = count(\Illuminate\Support\Arr::flatten($availableRooms));
             @endphp
-            <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
-            <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
+            <div class="flex justify-center sm:block">
+                <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
+            </div>
+            <div class="flex justify-center sm:block">
+                <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
+            </div>
             <form action="{{ $reservationId ? route('reservation.update', $params['reservation_id']) : route('reservation.store') }}" method="POST" novalidate>
                 @csrf
 
