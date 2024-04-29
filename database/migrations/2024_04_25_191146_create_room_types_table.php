@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('room_type');
             $table->decimal('price_per_night');
             $table->integer('capacity');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

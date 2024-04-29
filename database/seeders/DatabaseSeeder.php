@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 
         $roomTypes = [];
         foreach (file(__DIR__ . '\roomTypes.txt') as $line) {
-            list($roomType, $pricePerNight, $capacity) = explode(',', trim($line));
-            $roomTypes[] = ['room_type' => $roomType, 'price_per_night' => floatval($pricePerNight), 'capacity' => (int)$capacity];
+            list($roomType, $pricePerNight, $capacity, $description) = explode('|', trim($line));
+            $roomTypes[] = ['room_type' => $roomType, 'price_per_night' => floatval($pricePerNight), 'capacity' => (int)$capacity, 'description' => $description ];
         }
         
         foreach ($roomTypes as $roomType) {

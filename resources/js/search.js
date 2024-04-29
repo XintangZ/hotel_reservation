@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             const formData = Object.fromEntries(new FormData(reservationForm));
-            roomTd.textContent = `#${formData["room_id"]}`;
+            roomTd.textContent = `#${formData["room_id"]}`; // TODO: handle undefined room id
             guestCountTd.textContent = document.querySelector(
                 "#selected-guest-count"
             ).textContent;
