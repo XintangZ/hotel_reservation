@@ -42,7 +42,7 @@ class Reservation extends Model
 
     public function calculateTotalPrice()
     {
-        $pricePerNight = Room::find($this->room_id)->roomType()->first()->price_per_night;
+        $pricePerNight = Room::find($this->room_id)->roomType->price_per_night;
         $this->total_price = $pricePerNight * $this->number_of_nights;
     }
 

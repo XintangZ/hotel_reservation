@@ -1,4 +1,4 @@
-<div id="alert-error" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50" role="alert">
+<div id="alert-error" class="flex items-center p-4 mb-4 text-red-800 sm:rounded-lg bg-red-50" role="alert">
   <span class="sr-only">Error</span>
   <div class="ms-3 text-sm font-medium">
     {{ $slot }}

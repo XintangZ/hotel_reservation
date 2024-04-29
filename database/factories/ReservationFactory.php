@@ -34,7 +34,7 @@ class ReservationFactory extends Factory
             'number_of_guests' => function (array $attributes) {
                 $room = \App\Models\Room::find($attributes['room_id']);
                 if ($room) {
-                    $roomCapacity = $room->roomType()->first()->capacity;
+                    $roomCapacity = $room->roomType->capacity;
                     return $this->faker->numberBetween(1, $roomCapacity);
                 } else {
                     return 1; 

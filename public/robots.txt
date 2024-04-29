@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
-
-TODO: write robots
+Disallow: /search
+Disallow: /dashboard
+Disallow: /profile

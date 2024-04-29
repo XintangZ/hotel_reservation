@@ -1,4 +1,4 @@
-<div id="alert-success" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50" role="alert">
+<div id="alert-success" class="flex items-center p-4 mb-4 text-green-800 sm:rounded-lg bg-green-50" role="alert">
   <span class="sr-only">Success</span>
   <div class="ms-3 text-sm font-medium">
     {{ $slot }}
