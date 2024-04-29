@@ -24,9 +24,11 @@
                 <span id="selected-guest-count">{{ $numberOfGuests }}</span> {{ $numberOfGuests == 1 ? 'Guest' : 'Guests' }}
             </h1>
         </div>
-        <button class="text-gray-600 mx-4 border-b-2 hover:border-blue-400 transition ease-in-out duration-150" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
+        <button class="flex items-center text-gray-600 mx-4" type="button" data-accordion-target="#search-form-accordion-body" aria-expanded="false" aria-controls="search-form-accordion-body">
             {{ __('Edit Stay') }}
-        </button>
+            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
     </div>
 </div>
 

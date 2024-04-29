@@ -15,6 +15,6 @@
     <input type="hidden" name="reservation_id" value="{{ $reservationId }}">
     @endif
     <div class="flex flex-col-reverse xl:col-span-2">
-        <x-primary-button class="h-[42px] mt-1 justify-center">{{ $slot }}</x-primary-button>
+        <x-primary-button class="h-10 mt-1 justify-center">{{ $slot }}</x-primary-button>
     </div>
 </form>
