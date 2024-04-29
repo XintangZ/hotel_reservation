@@ -56,7 +56,7 @@
             <div class="flex justify-center sm:block">
                 <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
             </div>
-            <form action="{{ $reservationId ? route('reservation.update', $params['reservation_id']) : route('reservation.store') }}" method="POST" novalidate>
+            <form id="reservation-form" action="{{ $reservationId ? route('reservation.update', $params['reservation_id']) : route('reservation.store') }}" method="POST" novalidate>
                 @csrf
 
                 <input type="hidden" name="check_in_date" value="{{ $params['check_in_date'] }}">
@@ -83,7 +83,62 @@
                     @endforeach
                 </div>
 
-                <x-primary-button>{{ $reservationId ? __('Confirm Changes') : __('Book Now') }}</x-primary-button>
+                <x-primary-button data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button">{{ $reservationId ? __('Confirm Changes') : __('Book Now') }}</x-primary-button>
+
+                <!-- confirm booking modal -->
+                <div id="confirm-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                                <h3 class="text-xl font-semibold text-gray-900">
+                                    Confirm Reservation
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="confirm-modal">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div>
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Room
+                                        </th>
+                                        <td id="confirm-room" class="px-6 py-4">&nbsp;</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Check-in
+                                        </th>
+                                        <td id="confirm-check-in" class="px-6 py-4">&nbsp;</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Check-out
+                                        </th>
+                                        <td id="confirm-check-out" class="px-6 py-4">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Guest count
+                                        </th>
+                                        <td id="confirm-guest-count" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
+                                <x-secondary-button data-modal-hide="confirm-modal" type="button" class="me-2">Cancel</x-secondary-button>
+                                <x-primary-button type="submit">Confirm</x-primary-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

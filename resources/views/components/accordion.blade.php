@@ -22,7 +22,7 @@
                   <div class="w-full text-lg font-semibold">#{{ $room->room_number }}</div>
               </div>
               <div>
-                <x-primary-button class="hidden group-has-[:checked]/radio:block">
+                <x-primary-button data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" class="hidden group-has-[:checked]/radio:block">
                   {{ $reservedRoomId ? __('Confirm Changes') : __('Book Now') }}
                 </x-primary-button>
               </div>
