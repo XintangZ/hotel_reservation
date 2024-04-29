@@ -19,7 +19,7 @@ class RoomFactory extends Factory
         $roomTypeIds = \App\Models\RoomType::pluck('id')->toArray();
 
         return [
-            'room_number' => $this->faker->randomNumber(3),
+            'id' => $this->faker->unique()->randomNumber(3),
             'room_type_id' => $this->faker->randomElement($roomTypeIds),
         ];
     }

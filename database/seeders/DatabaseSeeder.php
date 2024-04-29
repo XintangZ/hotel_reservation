@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($roomNumbers as $roomNumber) {
-            \App\Models\Room::factory()->create(['room_number' => $roomNumber]);
+            \App\Models\Room::factory()->create(['id' => $roomNumber]);
         }
 
         \App\Models\Reservation::factory(10)->create();

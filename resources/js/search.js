@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const checkInDateInput = document.querySelector("#check_in_date");
     const checkOutDateInput = document.querySelector("#check_out_date");
-    const guestNumberInput = document.querySelector("#number_of_guests");
     checkInDateInput.addEventListener("change", (e) => {
         const checkOutDate = new Date(e.target.value);
         checkOutDate.setDate(checkOutDate.getDate() + 1);
@@ -31,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     bookingBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-            roomTd.textContent = e.target.dataset.room;
+            const formData = Object.fromEntries(new FormData(reservationForm));
+            roomTd.textContent = `#${formData["room_id"]}`;
             guestCountTd.textContent = document.querySelector(
                 "#selected-guest-count"
             ).textContent;

@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
-            $table->string('room_number')->unique();
+            $table->string('id')->primary();
             $table->foreignIdFor(\App\Models\RoomType::class);
             $table->timestamps();
         });

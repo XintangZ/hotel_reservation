@@ -32,7 +32,7 @@
                         </h1>
                     </div>
                     <p class="text-lg font-normal text-gray-500 mb-6">
-                        {{ $reservation->room()->first()->roomType()->first()->room_type }} - #{{ $reservation->room()->first()->room_number }}<br>
+                        {{ $reservation->room->roomType->room_type }} - #{{ $reservation->room->id }}<br>
                         {{ $reservation->number_of_guests }} {{ $reservation->number_of_guests === 1 ? 'Guest' : 'Guests' }}
                     </p>
 

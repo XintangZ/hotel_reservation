@@ -19,7 +19,7 @@
           @endif
           <label for="{{ $room->id }}" class="inline-flex items-center justify-between w-full p-5 text-gray-600 bg-white cursor-pointer peer-checked:bg-gray-300 peer-checked:text-gray-800 hover:text-gray-800 hover:bg-gray-100">
               <div class="block">
-                  <div class="w-full text-lg font-semibold">#{{ $room->room_number }}</div>
+                  <div class="w-full text-lg font-semibold">#{{ $room->id }}</div>
               </div>
               <div>
                 <x-primary-button data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" class="hidden group-has-[:checked]/radio:block">
