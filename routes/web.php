@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Reservation;
+use App\Models\RoomType;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// home page
+Route::get('/', [MainController::class, 'index'])->name('home');
+// search result page
+Route::get('/search', [MainController::class, 'search'])->name('room.search');
 
-Route::get('/rooms', function () {
-    return view('rooms');
-})->name('rooms');
+// create & edit & delete reservation
+Route::middleware('auth')->group(function () {
+    Route::post('/new', [ReservationController::class, 'store'])->name('reservation.store');
+    Route::get('/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::post('/edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::delete('/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
+});
 
+// user home page
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $reservations = Auth::user()->reservations()->orderBy('created_at', 'desc')->paginate(5);
+    return view('dashboard', compact('reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// edit & delete user
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

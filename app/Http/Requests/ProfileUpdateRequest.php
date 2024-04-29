@@ -18,7 +18,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'first_name' => ['string', 'max:255'],
             'last_name' => ['string', 'max:255'],
-            'phone' => ['string', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'phone' => ['string', 'max:10', Rule::unique(User::class)->ignore($this->user()->id)],  //TODO: add validation
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
