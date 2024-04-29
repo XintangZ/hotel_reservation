@@ -23,7 +23,7 @@
 
      <!-- drawer component -->
     <div id="drawer-top-search" class="fixed top-0 left-0 right-0 z-40 w-full p-6 transition-transform -translate-y-full bg-white" tabindex="-1" aria-labelledby="drawer-top-label">
-        <button type="button" data-drawer-hide="drawer-top-search" aria-controls="drawer-top-search" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center" >
+        <button type="button" data-drawer-hide="drawer-top-search" aria-controls="drawer-top-search" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center transition ease-in-out duration-150" >
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
             </svg>
@@ -83,7 +83,7 @@
                     @endforeach
                 </div>
 
-                <x-primary-button data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button">{{ $reservationId ? __('Confirm Changes') : __('Book Now') }}</x-primary-button>
+                <x-primary-button id="booking-btn" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" disabled>No Room Selected</x-primary-button>
 
                 <!-- confirm booking modal -->
                 <div id="confirm-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -95,7 +95,7 @@
                                 <h3 class="text-xl font-semibold text-gray-900">
                                     Confirm Reservation
                                 </h3>
-                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="confirm-modal">
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition ease-in-out duration-150" data-modal-hide="confirm-modal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
@@ -129,6 +129,18 @@
                                         </th>
                                         <td id="confirm-guest-count" class="px-6 py-4">&nbsp;/td>
                                     </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Length of stay
+                                        </th>
+                                        <td id="confirm-nights" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Price
+                                        </th>
+                                        <td id="confirm-price" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
                                     <tr>
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                                             Total
@@ -140,7 +152,7 @@
                             <!-- Modal footer -->
                             <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
                                 <x-secondary-button data-modal-hide="confirm-modal" type="button" class="me-2">Cancel</x-secondary-button>
-                                <x-primary-button type="submit">Confirm</x-primary-button>
+                                <x-primary-button type="submit" id="confirm-booking">Confirm</x-primary-button>
                             </div>
                         </div>
                     </div>

@@ -24,7 +24,7 @@
                 <span id="selected-guest-count">{{ $numberOfGuests }}</span> {{ $numberOfGuests == 1 ? 'Guest' : 'Guests' }}
             </h1>
         </div>
-        <button class="text-gray-600 mx-4 border-b-2 hover:border-blue-400" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
+        <button class="text-gray-600 mx-4 border-b-2 hover:border-blue-400 transition ease-in-out duration-150" type="button" data-drawer-target="drawer-top-search" data-drawer-show="drawer-top-search" data-drawer-placement="top" data-drawer-body-scrolling="true" aria-controls="drawer-top-search">
             {{ __('Edit Stay') }}
         </button>
     </div>
