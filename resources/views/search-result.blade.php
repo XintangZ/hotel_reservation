@@ -51,7 +51,7 @@
                 $resultCount = count(\Illuminate\Support\Arr::flatten($availableRooms));
             @endphp
             <div class="flex justify-center sm:block">
-                <h2 class="font-semibold text-4xl text-gray-800 leading-tight">Select a Room</h2>
+                <h2 class="font-semibold text-3xl lg:text-4xl text-gray-800 leading-tight">Select a Room</h2>
             </div>
             <div class="flex justify-center sm:block">
                 <p class="my-3 text-md text-gray-600">{{ $resultCount }} available {{ $resultCount <= 1 ? ' room' : 'rooms'}} found</p>
@@ -83,7 +83,7 @@
                     @endforeach
                 </div>
 
-                <x-primary-button id="booking-btn" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" disabled>No Room Selected</x-primary-button>
+                <x-primary-button id="booking-btn" class="ms-4 sm:ms-0" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" disabled>No Room Selected</x-primary-button>
 
                 <!-- confirm booking modal -->
                 <div id="confirm-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -113,6 +113,18 @@
                                     </tr>
                                     <tr class="border-b border-gray-200">
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Price
+                                        </th>
+                                        <td id="confirm-price" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Guest count
+                                        </th>
+                                        <td id="confirm-guest-count" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                                             Check-in
                                         </th>
                                         <td id="confirm-check-in" class="px-6 py-4">&nbsp;</td>
@@ -125,21 +137,9 @@
                                     </tr>
                                     <tr class="border-b border-gray-200">
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                            Guest count
-                                        </th>
-                                        <td id="confirm-guest-count" class="px-6 py-4">&nbsp;/td>
-                                    </tr>
-                                    <tr class="border-b border-gray-200">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                                             Length of stay
                                         </th>
                                         <td id="confirm-nights" class="px-6 py-4">&nbsp;/td>
-                                    </tr>
-                                    <tr class="border-b border-gray-200">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                                            Price
-                                        </th>
-                                        <td id="confirm-price" class="px-6 py-4">&nbsp;/td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
