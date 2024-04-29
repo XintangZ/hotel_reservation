@@ -123,11 +123,17 @@
                                         </th>
                                         <td id="confirm-check-out" class="px-6 py-4">&nbsp;</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="border-b border-gray-200">
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                                             Guest count
                                         </th>
                                         <td id="confirm-guest-count" class="px-6 py-4">&nbsp;/td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
+                                            Total
+                                        </th>
+                                        <td id="confirm-total" class="px-6 py-4">&nbsp;/td>
                                     </tr>
                                 </table>
                             </div>

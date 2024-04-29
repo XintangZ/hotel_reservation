@@ -20,19 +20,23 @@
             @if($reservations->count() === 0)
             <p class="text-center text-lg font-semibold uppercase tracking-widest text-gray-300 my-12 py-12">{{ __('You have no reservation.') }}</p>
             @else
-            <!-- TODO: add created at -->
                 @foreach ($reservations as $reservation)
                 <div class="bg-gray-50 border border-gray-200 sm:rounded-lg p-4 sm:p-8 md:p-12 mb-8">
-                    <p class="bg-blue-100 text-blue-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2">
-                        {{ $reservation->number_of_nights }} {{ $reservation->number_of_nights === 1 ? 'night' : 'nights' }}
-                    </p>
+                    <div class="flex justify-between">
+                        <p class="bg-blue-100 text-blue-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2">
+                            {{ $reservation->number_of_nights }} {{ $reservation->number_of_nights === 1 ? 'night' : 'nights' }}
+                        </p>
+                        <p class="text-sm font-normal text-gray-500">
+                           Booked at {{ $reservation->created_at }} <br>
+                        </p>
+                    </div>
                     <div class="grid sm:grid-cols-2">
                         <h1 class="text-gray-900 text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2">{{ \Carbon\Carbon::parse($reservation->check_in_date)->format('M d, Y') }} - {{ \Carbon\Carbon::parse($reservation->check_out_date)->format('M d, Y') }}</h1>
                         <h1 class="text-gray-900 text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 sm:text-end">
                             C${{ $reservation->total_price }}
                         </h1>
                     </div>
-                    <p class="text-lg font-normal text-gray-500 mb-6">
+                    <p class="text-lg font-normal text-gray-600 mb-6">
                         {{ $reservation->room->roomType->room_type }} - #{{ $reservation->room->id }}<br>
                         {{ $reservation->number_of_guests }} {{ $reservation->number_of_guests === 1 ? 'Guest' : 'Guests' }}
                     </p>

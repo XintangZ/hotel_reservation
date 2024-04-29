@@ -13,11 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const numberOfNightsEl = document.querySelector("#nights");
+    const numberOfNights = calculateNumberOfNights(
+        checkInDateInput.value,
+        checkOutDateInput.value
+    );
     if (numberOfNightsEl) {
-        numberOfNightsEl.textContent = calculateNumberOfNights(
-            checkInDateInput.value,
-            checkOutDateInput.value
-        );
+        numberOfNightsEl.textContent = `(${numberOfNights} ${
+            numberOfNights === 1 ? "night" : "nights"
+        })`;
     }
 
     const reservationForm = document.querySelector("#reservation-form");
@@ -25,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkInDateTd = document.querySelector("#confirm-check-in");
     const checkOutDateTd = document.querySelector("#confirm-check-out");
     const guestCountTd = document.querySelector("#confirm-guest-count");
+    const totalPriceTd = document.querySelector("#confirm-total");
     const bookingBtns = document.querySelectorAll(
         "button[data-modal-toggle='confirm-modal']"
     );
@@ -41,6 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
             checkOutDateTd.textContent = document.querySelector(
                 "#selected-check-out-date"
             ).textContent;
+            const totalPrice =
+                numberOfNights * parseFloat(e.target.dataset.price);
+            totalPriceTd.textContent = `C$${totalPrice.toFixed(2)}`;
         });
     });
 });
@@ -52,5 +59,5 @@ function calculateNumberOfNights(checkInDate, checkOutDate) {
     const differenceMs = checkOutDate.getTime() - checkInDate.getTime();
     const numberOfNights = Math.round(differenceMs / (1000 * 60 * 60 * 24));
 
-    return `(${numberOfNights} ${numberOfNights === 1 ? "night" : "nights"})`;
+    return numberOfNights;
 }
