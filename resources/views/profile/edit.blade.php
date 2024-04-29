@@ -4,6 +4,10 @@
         <title>{{ __('Profile') }}</title>
     </x-slot>
 
+    <x-slot name="scripts">
+        @vite(['resources/js/user.js'])
+    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}
