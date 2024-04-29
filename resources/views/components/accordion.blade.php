@@ -1,6 +1,6 @@
-<div id="accordion-{{ $id }}" data-accordion="collapse" data-active-classes="bg-gray-600" class="group bg-gray-800 has-[:checked]:bg-gray-600">
+<div id="accordion-{{ $id }}" data-accordion="collapse" data-active-classes="bg-blue-700" class="group bg-blue-800 has-[:checked]:bg-blue-600">
   <h2 id="accordion-{{ $id }}-heading">
-    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold text-white uppercase tracking-widest font-medium rtl:text-right hover:bg-gray-700 gap-3" data-accordion-target="#accordion-{{ $id }}-body" aria-expanded="false" aria-controls="accordion-{{ $id }}-body">
+    <button type="button" class="flex items-center justify-between w-full p-5 font-semibold text-white uppercase tracking-widest font-medium rtl:text-right hover:bg-blue-600 gap-3" data-accordion-target="#accordion-{{ $id }}-body" aria-expanded="false" aria-controls="accordion-{{ $id }}-body">
       <span class="group-has-[:checked]:hidden">{{ $slot }}</span>
       <span class="hidden group-has-[:checked]:block">Room Selected</span>
       <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

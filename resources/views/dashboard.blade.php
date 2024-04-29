@@ -1,6 +1,7 @@
 <x-app-layout>
-    <x-slot name="title">
-        {{ __('My Reservations') }}
+    <x-slot name="meta">
+        <meta name="robots" content="noindex, nofollow">
+        <title>{{ __('My Reservations') }}</title>
     </x-slot>
 
     <x-slot name="header">
@@ -47,7 +48,7 @@
                         </form>
                         @if(!$isPast)
                         <div class="flex justify-center">
-                            <a href="{{ route('reservation.edit', $reservation->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white text-center uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <a href="{{ route('reservation.edit', $reservation->id) }}" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white text-center uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Change Reservation
                             </a>
                         </div>

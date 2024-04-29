@@ -4,8 +4,9 @@
 @endphp
 
 <x-app-layout>
-    <x-slot name="title">
-        {{ $reservationId ? __('Change Reservation') : __('New Reservation') }}
+    <x-slot name="meta">
+        <meta name="robots" content="noindex, nofollow">
+        <title>{{ $reservationId ? __('Change Reservation') : __('New Reservation') }}</title>
     </x-slot>
 
     <x-slot name="scripts">

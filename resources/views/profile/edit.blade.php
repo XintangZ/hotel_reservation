@@ -1,6 +1,7 @@
 <x-app-layout>
-    <x-slot name="title">
-        {{ __('Profile') }}
+    <x-slot name="meta">
+        <meta name="robots" content="noindex, nofollow">
+        <title>{{ __('Profile') }}</title>
     </x-slot>
 
     <x-slot name="header">
