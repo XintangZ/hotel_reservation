@@ -35,13 +35,11 @@
         @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="grow flex flex-col">
                 {{ $slot }}
             </main>
 
-            <div class="grow flex flex-col-reverse">
-                @include('layouts.footer')
-            </div>
+            @include('layouts.footer')
         </div>
     </body>
 </html>

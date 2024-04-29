@@ -1,5 +1,4 @@
-
-<form action="{{ route('room.search') }}" method="GET" class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4" novalidate>
+<form action="{{ route('room.search') }}" method="GET" class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 gap-4" novalidate>
     <div class="xl:col-span-4">
         <x-input-label for="check_in_date" :value="__('Check-in Date')" />
         <x-text-input type="date" name="check_in_date" id="check_in_date" class="mt-1 block w-full" value="{{ $checkInDate ?? \Carbon\Carbon::today()->toDateString() }}" min="{{ \Carbon\Carbon::today()->toDateString() }}" />
