@@ -10,10 +10,10 @@
                     C${{ $roomType->price_per_night }}
                 </div>
             </div>
-            <p class="mb-3 px-4 font-normal text-lg text-gray-700">
+            <p class="mb-3 px-4 font-normal text-md text-gray-700">
                 Sleeps {{ $roomType->capacity }}
             </p>
-            <p class="mb-3 text-xl text-gray-700 px-4 text-justify">
+            <p class="mb-3 text-lg text-gray-700 px-4">
                 {{ $roomType->description }}
             </p>
         </div>
