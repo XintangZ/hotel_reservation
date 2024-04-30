@@ -66,7 +66,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
         $reservation = Reservation::find($id);
-        $searchRoute = route('room.search', [
+        $searchRoute = route('rooms.search', [
             'check_in_date' => $reservation->check_in_date,
             'check_out_date' => $reservation->check_out_date,
             'number_of_guests' => $reservation->number_of_guests,

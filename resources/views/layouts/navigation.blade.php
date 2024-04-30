@@ -22,12 +22,8 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link
-                        :href="route('room.search', [
-                                    'check_in_date' => \Carbon\Carbon::today()->toDateString(),
-                                    'check_out_date' => \Carbon\Carbon::tomorrow()->toDateString(),
-                                    'number_of_guests' => 1,
-                                ])"
-                        :active="request()->routeIs('room.search')"
+                        :href="route('rooms')"
+                        :active="request()->routeIs('rooms')"
                     >
                         {{ __("Rooms") }}
                     </x-nav-link>
@@ -37,11 +33,17 @@
             @php
                 $weather=session()->get('weather');
             @endphp
-            <div class="flex grow items-center justify-end">
-                <img src="http://openweathermap.org/img/w/{{ $weather['weather'][0]['icon'] }}.png" alt="weather-icon">
-                <div class="mx-2 text-sm text-gray-500">
-                    <p>{{ $weather['weather'][0]['main'] }}</p>
-                    <p>{{ round($weather['main']['temp']) }}&deg;C</p>
+            <div class="flex flex-col grow items-end self-center">
+                <div class="flex items-center justify-end" data-tooltip-target="tooltip-bottom" data-tooltip-placement="left">
+                    <img src="http://openweathermap.org/img/w/{{ $weather['weather'][0]['icon'] }}.png" alt="weather-icon">
+                    <div class="mx-2 text-sm text-gray-500">
+                        <p>{{ $weather['weather'][0]['main'] }}</p>
+                        <p>{{ round($weather['main']['temp']) }}&deg;C</p>
+                    </div>
+                </div>
+                <div id="tooltip-bottom" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-500 bg-blue-100 rounded-md shadow-sm opacity-0 tooltip transition-opacity duration-500">
+                    Current Montreal Weather
+                    <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
             </div>
 
@@ -154,12 +156,8 @@
 
         <div class="pb-3 space-y-1">
             <x-responsive-nav-link
-                :href="route('room.search', [
-                            'check_in_date' => \Carbon\Carbon::today()->toDateString(),
-                            'check_out_date' => \Carbon\Carbon::tomorrow()->toDateString(),
-                            'number_of_guests' => 1,
-                        ])"
-                :active="request()->routeIs('room.search')"
+                :href="route('rooms')"
+                :active="request()->routeIs('rooms')"
             >
                 {{ __("Rooms") }}
             </x-responsive-nav-link>

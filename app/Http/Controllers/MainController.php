@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Http\Requests\RoomSearchRequest;
 use App\Models\RoomType;
+use Illuminate\Support\Carbon;
 
 class MainController extends Controller
 {
@@ -20,16 +21,19 @@ class MainController extends Controller
         return view('home', compact('weather'));
     }
 
-    /**
-     * Display the specified resources.
-     * 
-     * @param  App\Http\Requests\RoomSearchRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function search(RoomSearchRequest $request)
     {
-        $request->validated();
         $params = $request->all();
+
+        // Check if all required parameters are present
+        if (!isset($params['check_in_date']) || !isset($params['check_out_date']) || !isset($params['number_of_guests'])) {
+            $params['check_in_date'] = Carbon::now()->format('Y-m-d');
+            $params['check_out_date'] = Carbon::now()->addDay(1)->format('Y-m-d');
+            $params['number_of_guests'] = 1;
+        } else {
+            $request->validated();
+        }
+
         $reservationToEdit = isset($params['reservation_id']) ? Reservation::find($params['reservation_id']) : null;
 
         $suitableRoomTypes = RoomType::where('capacity', '>=', $params['number_of_guests'])->get();
@@ -48,69 +52,27 @@ class MainController extends Controller
         return view('search-result', compact('params', 'availableRooms'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function defaultSearch()
     {
-        //
-    }
+        $params = [
+            'check_in_date' => Carbon::now()->format('Y-m-d'),
+            'check_out_date' => Carbon::now()->addDay(1)->format('Y-m-d'),
+            'number_of_guests' => 1,
+        ];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $roomTypes = RoomType::all();
+        $availableRooms = [];
+        foreach ($roomTypes as $roomType) {
+            $rooms = $roomType->rooms()->get();
+            foreach ($rooms as $key => $room) {
+                if (!$room->isAvailable($params['check_in_date'], $params['check_out_date'])) {
+                    unset($rooms[$key]);
+                }
+            }
+            $availableRooms[$roomType->id] = $rooms;
+        }
+        $reminder = "Check your stay dates. These rooms are available for 1 night starting tonight.";
+        
+        return view('search-result', compact('params', 'availableRooms', 'reminder'));
     }
 }

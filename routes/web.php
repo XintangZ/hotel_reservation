@@ -21,7 +21,8 @@ use App\Models\RoomType;
 // home page
 Route::get('/', [MainController::class, 'index'])->middleware('weather')->name('home');
 // search result page
-Route::get('/search', [MainController::class, 'search'])->middleware('weather')->name('room.search');
+Route::get('/rooms', [MainController::class, 'defaultSearch'])->middleware('weather')->name('rooms');
+Route::get('/search', [MainController::class, 'search'])->middleware('weather')->name('rooms.search');
 
 // create & edit & delete reservation
 Route::middleware('auth')->group(function () {
