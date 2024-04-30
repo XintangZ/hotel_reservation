@@ -22,7 +22,7 @@
                     numberOfGuests="{{ $params['number_of_guests'] }}"
                 />
             </h2>
-            <div id="search-form-accordion-body" class="hidden border-t pt-2 mt-2" aria-labelledby="search-form-accordion-heading">
+            <div id="search-form-accordion-body" class="hidden pt-4 mt-2" aria-labelledby="search-form-accordion-heading">
                 <x-search-form
                     checkInDate="{{ $params['check_in_date'] }}"
                     checkOutDate="{{ $params['check_out_date'] }}"
@@ -79,7 +79,7 @@
                     @endforeach
                 </div>
 
-                <x-primary-button id="booking-btn" class="ms-4 sm:ms-0" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" disabled>No Room Selected</x-primary-button>
+                <button id="booking-btn" class="py-4 bg-blue-800 border border-transparent sm:rounded-md font-semibold text-md text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 transition ease-in-out duration-150 w-full" data-modal-target="confirm-modal" data-modal-toggle="confirm-modal" type="button" disabled>No Room Selected</button>
 
                 <!-- confirm booking modal -->
                 <div id="confirm-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

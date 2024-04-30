@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         roomRadioInputs.forEach((input) => {
             input.addEventListener("change", () => {
                 bookingBtn.disabled = false;
-                bookingBtn.textContent = "Book Now";
+                bookingBtn.innerHTML = `${input.dataset.type} - #${input.value}<br>Book Now`;
 
                 const totalPrice =
                     numberOfNights * parseFloat(input.dataset.price);
