@@ -15,18 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const reservationForm = document.querySelector("#reservation-form");
     if (reservationForm) {
-        const bookingBtn = document.querySelector("#booking-btn");
         const roomRadioInputs = reservationForm.querySelectorAll(
             "input[name=room_id]"
         );
-
-        const checkInDateTd = document.querySelector("#confirm-check-in");
-        const checkOutDateTd = document.querySelector("#confirm-check-out");
-        const guestCountTd = document.querySelector("#confirm-guest-count");
-        const roomTd = document.querySelector("#confirm-room");
-        const pricePerNightTd = document.querySelector("#confirm-price");
-        const numberOfNightsTd = document.querySelector("#confirm-nights");
-        const totalPriceTd = document.querySelector("#confirm-total");
 
         const numberOfNights = calculateNumberOfNights(
             checkInDateInput.value,
@@ -37,28 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
         })`;
 
         roomRadioInputs.forEach((input) => {
+            if (input.checked) {
+                enableBookingBtn(input);
+                populateConfirmModal(input, numberOfNights);
+            }
+        });
+
+        roomRadioInputs.forEach((input) => {
             input.addEventListener("change", () => {
-                bookingBtn.disabled = false;
-                bookingBtn.innerHTML = `${input.dataset.type} - #${input.value}<br>Book Now`;
-
-                const totalPrice =
-                    numberOfNights * parseFloat(input.dataset.price);
-
-                roomTd.textContent = `${input.dataset.type} - #${input.value}`;
-                guestCountTd.textContent = document.querySelector(
-                    "#selected-guest-count"
-                ).textContent;
-                checkInDateTd.textContent = document.querySelector(
-                    "#selected-check-in-date"
-                ).textContent;
-                checkOutDateTd.textContent = document.querySelector(
-                    "#selected-check-out-date"
-                ).textContent;
-                numberOfNightsTd.textContent = `${numberOfNights} ${
-                    numberOfNights === 1 ? "night" : "nights"
-                }`;
-                pricePerNightTd.textContent = `C$${input.dataset.price}/night`;
-                totalPriceTd.textContent = `C$${totalPrice.toFixed(2)}`;
+                enableBookingBtn(input);
+                populateConfirmModal(input, numberOfNights);
             });
         });
     }
@@ -72,4 +51,36 @@ function calculateNumberOfNights(checkInDate, checkOutDate) {
     const numberOfNights = Math.round(differenceMs / (1000 * 60 * 60 * 24));
 
     return numberOfNights;
+}
+
+function enableBookingBtn(roomInput) {
+    const bookingBtn = document.querySelector("#booking-btn");
+
+    bookingBtn.disabled = false;
+    bookingBtn.innerHTML = `${roomInput.dataset.type} - #${roomInput.value}<br>Book Now`;
+}
+
+function populateConfirmModal(roomInput, numberOfNights) {
+    let totalPrice = numberOfNights * parseFloat(roomInput.dataset.price);
+
+    document.querySelector(
+        "#confirm-room"
+    ).textContent = `${roomInput.dataset.type} - #${roomInput.value}`;
+    document.querySelector("#confirm-guest-count").textContent =
+        document.querySelector("#selected-guest-count").textContent;
+    document.querySelector("#confirm-check-in").textContent =
+        document.querySelector("#selected-check-in-date").textContent;
+    document.querySelector("#confirm-check-out").textContent =
+        document.querySelector("#selected-check-out-date").textContent;
+    document.querySelector(
+        "#confirm-nights"
+    ).textContent = `${numberOfNights} ${
+        numberOfNights === 1 ? "night" : "nights"
+    }`;
+    document.querySelector(
+        "#confirm-price"
+    ).textContent = `C$${roomInput.dataset.price}/night`;
+    document.querySelector(
+        "#confirm-total"
+    ).textContent = `C$${totalPrice.toFixed(2)}`;
 }
