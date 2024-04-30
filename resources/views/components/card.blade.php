@@ -5,15 +5,15 @@
             <div class="flex justify-between mb-2 md:mb-4 lg:mb-8">
                 <div class="flex flex-col-reverse">
                     <h5 class="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 px-4 order-2">{{ $roomType->room_type }}</h5>
-                    <p class="px-4 font-normal text-md text-gray-700 order-1">
+                    <p class="mt-2 px-4 font-normal text-md text-gray-700 order-1">
                         Sleeps {{ $roomType->capacity }}
                     </p>
                 </div>
-                <div class="p-4 text-2xl lg:text-3xl font-bold text-center">
+                <div class="px-4 text-2xl lg:text-3xl font-bold text-center">
                     C${{ $roomType->price_per_night }}
                 </div>
             </div>
-            <p class="mb-3 text-lg text-gray-700 px-4">
+            <p class="mb-3 sm:mb-0 text-lg text-gray-700 px-4">
                 {{ $roomType->description }}
             </p>
         </div>

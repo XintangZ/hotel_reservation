@@ -34,6 +34,17 @@
                 </div>
             </div>
 
+            @php
+                $weather=session()->get('weather');
+            @endphp
+            <div class="flex grow items-center justify-end">
+                <img src="http://openweathermap.org/img/w/{{ $weather['weather'][0]['icon'] }}.png" alt="weather-icon">
+                <div class="mx-2 text-sm text-gray-500">
+                    <p>{{ $weather['weather'][0]['main'] }}</p>
+                    <p>{{ round($weather['main']['temp']) }}&deg;C</p>
+                </div>
+            </div>
+
             <!-- Settings Dropdown -->
             @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6">
