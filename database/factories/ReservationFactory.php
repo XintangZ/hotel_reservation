@@ -20,17 +20,22 @@ class ReservationFactory extends Factory
         $userIds = \App\Models\User::pluck('id')->toArray();
         $roomIds = \App\Models\Room::pluck('id')->toArray();
 
-        return [
-            'user_id'=>$this->faker->randomElement($userIds),
-            'room_id'=>$this->faker->randomElement($roomIds),
-            'check_in_date' => $this->faker->dateTimeThisYear('+4 months'),
-            'check_out_date' => function (array $attributes) {
-                $checkInDate = $attributes['check_in_date'];
-                $daysToAdd = $this->faker->numberBetween(1, 15);
-                $upperLimitDate = Carbon::parse($checkInDate)->addDays($daysToAdd);
+        $checkInDate = $this->faker->dateTimeThisYear('+2 months');
+        $checkOutDate = Carbon::parse($checkInDate)->addDays($this->faker->numberBetween(2, 15));
 
-                return $this->faker->dateTimeBetween($checkInDate, $upperLimitDate);
+        return [
+            'user_id' => $this->faker->randomElement($userIds),
+            'room_id' => function (array $attributes) use ($roomIds, $checkInDate, $checkOutDate) {
+                $existingReservations = \App\Models\Reservation::where('check_in_date', '<=', $checkOutDate)
+                    ->where('check_out_date', '>=', $checkInDate)
+                    ->pluck('room_id')
+                    ->toArray();
+    
+                $availableRoomIds = array_diff($roomIds, $existingReservations);
+                return $this->faker->randomElement($availableRoomIds);
             },
+            'check_in_date' => $checkInDate,
+            'check_out_date' => $checkOutDate,
             'number_of_guests' => function (array $attributes) {
                 $room = \App\Models\Room::find($attributes['room_id']);
                 if ($room) {

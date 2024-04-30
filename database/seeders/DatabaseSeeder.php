@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
             \App\Models\Room::factory()->create(['id' => $roomNumber]);
         }
 
-        \App\Models\Reservation::factory(10)->create();
+        \App\Models\Reservation::factory(20)->create();
     }
 }
