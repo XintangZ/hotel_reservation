@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session('successMsg'))
-            <x-success-alert>{{ session('successMsg') }}</x-success-alert>
+            <x-success-alert dismissable>{{ session('successMsg') }}</x-success-alert>
             @endif
 
             @if($reservations->count() === 0)

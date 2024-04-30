@@ -43,6 +43,10 @@
                 </x-error-alert>
             @endif
 
+            @if(isset($reminder))
+            <x-info-alert>{{ $reminder }}</x-info-alert>
+            @endif
+
             @php
                 $resultCount = count(\Illuminate\Support\Arr::flatten($availableRooms));
             @endphp
