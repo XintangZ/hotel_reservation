@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(2)->create();
 
         $roomTypes = [];
-        foreach (file(__DIR__ . '\roomTypes.txt') as $line) {
+        foreach (file(__DIR__ . '/roomTypes.txt') as $line) {
             list($roomType, $pricePerNight, $capacity, $description) = explode('|', trim($line));
             $roomTypes[] = ['room_type' => $roomType, 'price_per_night' => floatval($pricePerNight), 'capacity' => (int)$capacity, 'description' => $description ];
         }
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $roomNumbers = [];
-        foreach (file(__DIR__ . '\rooms.txt') as $line) {
+        foreach (file(__DIR__ . '/rooms.txt') as $line) {
             $roomNumbers[] = trim($line);
         }
 
